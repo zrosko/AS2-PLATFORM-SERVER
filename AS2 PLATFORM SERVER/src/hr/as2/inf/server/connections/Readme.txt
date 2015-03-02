@@ -1,0 +1,2 @@
+http://tutorials.jenkov.com/java-persistence/advanced-connection-and-transaction-demarcation-and-propagation.html
+http://www.tomcatexpert.com/blog/2010/03/12/explaining-jdbc-pool-high-concurrency-alternative-connection-pooling-module

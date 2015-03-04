@@ -9,6 +9,7 @@ import hr.as2.inf.common.data.valuelist.AS2ValueListInfo;
 import hr.as2.inf.common.logging.AS2Trace;
 import hr.as2.inf.common.security.user.AS2User;
 import hr.as2.inf.common.session.AS2Session;
+import hr.as2.inf.server.session.AS2SessionFactory;
 
 import java.sql.Clob;
 import java.sql.ResultSet;
@@ -42,8 +43,13 @@ public final class AS2ValueListHandler {
 
     public AS2RecordList handleResultSet(ResultSet rs) {
         AS2RecordList as2_rs = new AS2RecordList();
-        AS2User user = null;//TODO AS2SessionFactory.getInstance().getCurrentSession(new AS2Record());
-	    AS2Session session = new AS2Session();//TODOAS2SessionFactory.getInstance().getCurrentSession();
+        AS2User user = AS2SessionFactory.getInstance().getCurrentUser();
+        AS2Session session = null;
+        try{
+        	session = AS2SessionFactory.getInstance().getCurrentSession();
+        }catch(Exception e){
+        	session = null;
+        }
 	    if(!session.handleValueList())
 	        return null;
         AS2Record service = null;//TODO AS2SessionFactory.getInstance().getCurrentRequest();

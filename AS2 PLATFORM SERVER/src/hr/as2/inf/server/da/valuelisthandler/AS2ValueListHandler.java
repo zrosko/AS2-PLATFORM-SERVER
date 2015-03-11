@@ -50,6 +50,8 @@ public final class AS2ValueListHandler {
         }catch(Exception e){
         	session = null;
         }
+        if(session == null) 
+        	return null;
 	    if(!session.handleValueList())
 	        return null;
         AS2Record service = null;//TODO AS2SessionFactory.getInstance().getCurrentRequest();

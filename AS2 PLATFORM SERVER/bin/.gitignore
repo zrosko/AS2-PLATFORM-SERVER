@@ -1,1 +1,10 @@
 /hr
+/AS2ConnectionAS400.class
+/AS2ConnectionCassandra.class
+/AS2ConnectionHadoop.class
+/AS2ConnectionMongo.class
+/J2EEPcmlDataTag.class
+/J2EEPcmlProgramTag.class
+/AS2DataAccessObjectCassandra.class
+/J2EEDataAccessObjectAs400.class
+/J2EEPcmlStructureTag.class

@@ -34,8 +34,7 @@ public class AS2ServerRequestHandlerRest extends AS2ServerRequestHandler {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		serviceAs2(req,resp);
-	}
-	
+	}	
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)

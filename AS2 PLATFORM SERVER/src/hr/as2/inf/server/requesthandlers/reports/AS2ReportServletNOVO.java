@@ -1,11 +1,10 @@
-package hr.as2.inf.server.requesthandlers.reports;
-
 /**
  * (C) Copyright 2013, Adriacom Software d.o.o.
  *	   Report service class for Jasper/Pentaho/Cristal,... reports.
  */
 //TODO net.sf.jasperreports.awt.ignore.missing.font=true
 //http://stackoverflow.com/questions/3987804/jasper-stops-finding-one-font
+package hr.as2.inf.server.requesthandlers.reports;
 
 import hr.as2.inf.common.core.AS2Constants;
 import hr.as2.inf.common.data.AS2InvocationContext;
@@ -26,7 +25,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
-//import javax.servlet.annotation.WebServlet;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 /**
@@ -37,44 +36,48 @@ import javax.servlet.http.HttpServletResponse;
  	http://www.metatags.info/meta_http_equiv_content_disposition
  */
 @SuppressWarnings("serial")
-//@WebServlet("/module/report")
-public class AS2ServerRequestHandlerReport extends AS2ServerRequestHandler implements AS2ReportConstants{
-	//Defaults
-	private static final String DEFAULT_REPORTS_FILENAME = "TODO";//TODO Error.jsp or ?
-	private static final String DEFAULT_REPORTS_FORMAT = "pdf";
-	private static final String DEFAULT_REPORTS_TYPE = ".jasper";
-	private static final String DEFAULT_REPORTS_DISPOSITION = "inline";
-	private static final String DEFAULT_REPORTS_SERVICE_PATH = "module/reports/"; /* war...*/
-	//Facade
-	public static final String COMPONENT = "Component";
-	public static final String SERVICE = "Service";
-	//Other
-	protected boolean _use_relative_URI = true;
-	protected boolean _use_dummy_parameter = true;
-	//Test
-	//  private String _component = "hr.adriacomsoftware.app.server.jb.facade.BankaFacadeServer";
-	private String _component = "hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer";
-	//  private String _service = "izvjestajBanke";
-	private String _service = "izvjestaji";
+@WebServlet("/module/report")
+public class AS2ReportServletNOVO extends AS2ServerRequestHandler implements AS2ReportConstants {
+//	Parameters
+//  private static final String REPORT_FILENAME = "reportFilename";
+//  private static final String REPORT_FORMAT = "reportFormat"; /** eg. pdf, doc, docx, xls, xlsx, pptx,...**/
+//  private static final String REPORT_TYPE = "reportType"; /** eg. jasper, pentaho, crystal,...**/
+//  private static final String REPORT_DISPOSITION = "reportDisposition"; /** eg. inline, attachment **/
+  //Defaults
+  private static final String DEFAULT_REPORTS_FILENAME = "TODO";//TODO Error.jsp or ?
+  private static final String DEFAULT_REPORTS_FORMAT = "pdf";
+  private static final String DEFAULT_REPORTS_TYPE = ".jasper";
+  private static final String DEFAULT_REPORTS_DISPOSITION = "inline";
+  private static final String DEFAULT_REPORTS_SERVICE_PATH = "module/reports/"; /* war...*/
+  //Facade
 
-	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		this.serviceReport(request, response);
-	}
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		this.serviceReport(request, response);
-	}
+  public static final String COMPONENT = "Component";
+  public static final String SERVICE = "Service";
+  //Other
+  protected boolean _use_relative_URI = true;
+  protected boolean _use_dummy_parameter = true;
+  //Test
+//  private String _component = "hr.adriacomsoftware.app.server.jb.facade.BankaFacadeServer";
+  private String _component = "hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer";
+//  private String _service = "izvjestajBanke";
+  private String _service = "izvjestaji";
 
-	public void serviceReport(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    this.serviceReport(request, response);
+  }
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response)
+      throws ServletException, IOException {
+    this.serviceReport(request, response);
+  }
+
+  public void serviceReport(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		byte[] byteArray = null;
 		AS2Record facade_request = null;
 		AS2Record response_vo = null;
-		String srvRemoteAddr = null;
 		try {
-			srvRemoteAddr = request.getRemoteAddr();
 			facade_request = readRequestParameters(request);
 			String reportFilename = facade_request.getAsString(REPORT_FILENAME, DEFAULT_REPORTS_FILENAME);
 			String reportFormat = facade_request.getAsString(REPORT_FORMAT, DEFAULT_REPORTS_FORMAT);
@@ -94,8 +97,8 @@ public class AS2ServerRequestHandlerReport extends AS2ServerRequestHandler imple
 			//TODO user retrieve from client
 			AS2User user = new AS2User();
 			facade_request.set(AS2Constants.USER_OBJ, user);
-			//			//TODO dummy ako nema parametara na facadi
-			//			facade_request.setDummyDto(_use_dummy_parameter);
+//			//TODO dummy ako nema parametara na facadi
+//			facade_request.setDummyDto(_use_dummy_parameter);
 
 			/***DODANO 07.11.20.13****/
 			if( facade_request.get("reportSelected")==null)
@@ -103,17 +106,14 @@ public class AS2ServerRequestHandlerReport extends AS2ServerRequestHandler imple
 			else
 				facade_request.set("@@report_selected", facade_request.get("reportSelected"));
 			facade_request.set("@@transform_to",facade_request.get("transform_to"));
-			//			facade_request.set("@@transform_to","hr.adriacomsoftware.app.common.karticno.gr.dto.McardGrZahtjevVo");
-			//			facade_request.set("@@service","izvjestaji");
-			//			facade_request.set("@@component","hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer");
-			//			facade_request.set("@@oib","hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer");
+//			facade_request.set("@@transform_to","hr.adriacomsoftware.app.common.karticno.gr.dto.McardGrZahtjevVo");
+//			facade_request.set("@@service","izvjestaji");
+//			facade_request.set("@@component","hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer");
+//			facade_request.set("@@oib","hr.adriacomsoftware.app.server.karticno.gr.facade.KarticnoFacadeServer");
 			/***DODANO 07.11.20.13****/
 			try{
-				// Invocation Context
-				AS2InvocationContext as2_context = prepareInvocationContext(facade_request, srvRemoteAddr);
-				// Dispatch Request
-				Object facade_response = dispatchRequestToInvoker(facade_request, as2_context);
-				//Object facade_response = null;//TODOJ2EEApplicationControllerFactory.getInstance().getApplicationController().executeRequest(facade_request);
+				Object facade_response = dispatchRequestToInvoker(facade_request, new AS2InvocationContext());
+				//Object facade_response = J2EEApplicationControllerFactory.getInstance().getApplicationController().executeRequest(facade_request);
 
 				if (facade_response instanceof Throwable){
 					request.setAttribute("error", facade_response);
@@ -146,17 +146,17 @@ public class AS2ServerRequestHandlerReport extends AS2ServerRequestHandler imple
 	}
 
 
-	//  /**AS dodano!**/
-	//  public void postaviFacadeAtribute(HashMap<String,String> atributi){
-	//		facade_request.set("@@report_selected",atributi.get("@@report_selected"));
-	//		facade_request.set("oib",atributi.get("oib"));
-	//		facade_request.set("jmbg",atributi.get("jmbg"));
-	//		facade_request.set("broj_zahtjeva",atributi.get("broj_zahtjeva"));
-	//
-	//  }
+//  /**AS dodano!**/
+//  public void postaviFacadeAtribute(HashMap<String,String> atributi){
+//		facade_request.set("@@report_selected",atributi.get("@@report_selected"));
+//		facade_request.set("oib",atributi.get("oib"));
+//		facade_request.set("jmbg",atributi.get("jmbg"));
+//		facade_request.set("broj_zahtjeva",atributi.get("broj_zahtjeva"));
+//
+//  }
 
 
-	protected AS2Record readRequestParameters(HttpServletRequest req) {
+  protected AS2Record readRequestParameters(HttpServletRequest req) {
 		AS2Record inputFields = new AS2Record();
 		String service = null;
 		String component = null;
@@ -182,8 +182,8 @@ public class AS2ServerRequestHandlerReport extends AS2ServerRequestHandler imple
 			// Ignoriraj neke parametre medu poslovnim podacima.
 			// Ova polja su sistemska pomocna polja.
 			if (!name.equals(SERVICE) &&
-					!name.equals(COMPONENT)&&
-					!name.startsWith("@@"))
+				!name.equals(COMPONENT)&&
+				!name.startsWith("@@"))
 				inputFields.set(name, value);
 		}
 		return inputFields;

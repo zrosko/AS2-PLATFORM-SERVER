@@ -16,5 +16,12 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/APACHE_TOMCAT"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JASPER_REPORTS"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/FILES"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/APACHE_POI"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/APACHE_COMMONS"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/ITEXT"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PENTAHO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/RDBMS"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/REPORTS"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/DOCX_CONVERTERS"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

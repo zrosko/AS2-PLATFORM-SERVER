@@ -35,7 +35,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebFilter("/AS2AuthenticationFilter")
 public class AS2AuthenticationFilter implements Filter, AS2SecurityConstants {
-
+    //Authentitation type
+    public static int AUTHENTICATION_NA = 0;
+    public static int AUTHENTICATION_AD = 1;
+    public static int AUTHENTICATION_LDAP = 2;
+    public static int AUTHENTICATION_JDBC = 3;
+    public static int AUTHENTICATION_TYPE = AUTHENTICATION_AD;
 	private String _login_url = "module/login/login.jsp";//default
 	private static String _post_action = "security_check";
 	private static String _as2_servlet_action = "json_servlet";
@@ -45,13 +50,20 @@ public class AS2AuthenticationFilter implements Filter, AS2SecurityConstants {
 		parametar_value = config.getInitParameter(AS2_LOGIN_LINK);
 		if (parametar_value != null && parametar_value.length() > 0)
 			_login_url = parametar_value;
+		//authentication_type
+		parametar_value = config.getInitParameter(AS2_AUTHENTICATION_TYPE);
+		if (parametar_value != null && parametar_value.length() > 0)
+			AUTHENTICATION_TYPE = Integer.parseInt(parametar_value);
 	}
 
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		if (request.getServletPath().contains(_post_action)
+		if(AUTHENTICATION_TYPE==AUTHENTICATION_NA){
+			req.setAttribute(AS2_USER_AUTHORIZED, true);
+			chain.doFilter(req, res);//TODO
+		}else if (request.getServletPath().contains(_post_action)
 				|| request.getServletPath().contains("/module/")
 				/*|| request.getServletPath().contains("login")*/) {
 			chain.doFilter(req, res);

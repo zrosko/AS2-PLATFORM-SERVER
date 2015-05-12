@@ -87,8 +87,8 @@ public class AS2AuthenticationServlet extends AS2ServerRequestHandler implements
     public static int SESSION_JDBC = 2;
     public static int SESSION_TYPE = SESSION_SERVLET;
     //Defaults
-    private final String username = "admin";
-    private final String password = "password";
+    private final String username = "gost";
+    private final String password = "gost";
     private String _application_url = "/portal";
     private String _login_url = "module/login/login.jsp";
 	//web.xml parameter, here are defaults
@@ -176,9 +176,13 @@ public class AS2AuthenticationServlet extends AS2ServerRequestHandler implements
         //LOG IN TO 
         //Need a servlet parameter to decide the authentication type (AD,LDAP, DAO)
         if(AUTHENTICATION_TYPE==AUTHENTICATION_NA){
-        	if(username.equals(j_username) && password.equals(j_password)){
-        		login_ok = true;
-        	}
+        	request.set(AS2_USERNAME, username);
+        	request.set(AS2_PASSWORD, password);
+        	request.set(AS2_J_USERNAME, username);
+        	request.set(AS2_J_PASSWORD, password);
+        	j_username = username;
+        	j_password = password;
+        	login_ok = true;
         }else if(AUTHENTICATION_TYPE == AUTHENTICATION_JDBC){ 
         	login_ok = loginDAO(request);			        	
         }else  if(AUTHENTICATION_TYPE==AUTHENTICATION_AD){
@@ -308,7 +312,7 @@ public class AS2AuthenticationServlet extends AS2ServerRequestHandler implements
 			value.setPassword(vo.get(AS2_J_PASSWORD));
 			value.setApplication(_application);//from web.xml
 			AS2User _user = AS2AuthenticationFacadeServer.getInstance().logIn(value);
-			if(_user!=null && _user.get("valid").equals("ok"))
+			if(_user!=null && _user.get("user_name").equals(vo.get("j_username")))
 				success = true;
 			AS2Transaction.commit();
 		}catch(Exception e){

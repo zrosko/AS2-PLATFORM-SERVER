@@ -87,7 +87,11 @@ public final class J2EERBACKorisnikJdbc extends J2EEJdbc {
             _ip_address = value.get("ip_address");
             co = getConnection();
             Connection jco = co.getJdbcConnection();
-            PreparedStatement pstmt = jco.prepareStatement(LOGIN_VIEW+"'"+value.getUserName()+"' AND aplikacija ="+"'"+value.getApplication()+"'");
+            PreparedStatement pstmt = null;
+            if(value.getUserName().equals("guest"))
+            	pstmt = jco.prepareStatement(LOGIN_VIEW+"'"+value.getUserName()+"' AND aplikacija ="+"'"+value.getApplication()+"'");
+            else
+            	pstmt = jco.prepareStatement(LOGIN_VIEW+"'"+value.getUserName()+"' AND password ="+"'"+value.get(AS2User.PASSWORD)+"'"+" AND aplikacija ="+"'"+value.getApplication()+"'");
             pstmt.setMaxRows(co.getMaxRows());
             ResultSet rs = pstmt.executeQuery();
             j2eers = transformResultSet(rs);
@@ -223,12 +227,13 @@ public final class J2EERBACKorisnikJdbc extends J2EEJdbc {
     public AS2RecordList daoFindUserApplication(AS2User value) throws AS2DataAccessException {
         J2EEConnectionJDBC co = null;
         AS2RecordList j2eers = null;
+        PreparedStatement pstmt = null;
         try {
             co = getConnection();
             Connection jco = co.getJdbcConnection();
-            PreparedStatement pstmt = jco.prepareStatement("select * from view_rbac_login_aplikacije where username = ? and application = ? ");
-            pstmt.setObject(1,value.get("as2_username"));
-            pstmt.setObject(2,value.get("application"));
+	        pstmt = jco.prepareStatement("select * from view_rbac_login_aplikacije where username = ? and application = ? ");
+	        pstmt.setObject(1,value.get("as2_username"));
+	        pstmt.setObject(2,value.get("application"));
             pstmt.setMaxRows(co.getMaxRows());
             ResultSet rs = pstmt.executeQuery();
             j2eers = transformResultSet(rs);

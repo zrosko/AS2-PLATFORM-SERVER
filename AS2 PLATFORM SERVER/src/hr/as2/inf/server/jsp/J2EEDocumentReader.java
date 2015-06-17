@@ -18,13 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class J2EEDocumentReader extends HttpServlet {
-    private String serverHost = "localhost";
-    private String severName = "ServletServer";
-    private int timeout = 60000;
-    private static int count = 0;
-    private int number;
+	private static final long serialVersionUID = 1L;
+	//private String serverHost = "localhost";
+	//private String severName = "ServletServer";
+    //private int timeout = 60000;
+    //private static int count = 0;
+    //private int number;
 	//private static long _httpTransportCallCounter = 0;
-	private static AS2Context CONTEXT_KEEPER;
+	//private static AS2Context CONTEXT_KEEPER;
 	/** 
 	 * Call all the tasks found in J2EEContextDestroy file. 
 	 */

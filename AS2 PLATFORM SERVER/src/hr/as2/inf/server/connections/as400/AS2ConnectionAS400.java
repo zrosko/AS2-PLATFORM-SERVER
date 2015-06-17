@@ -27,7 +27,7 @@ import com.ibm.as400.access.DataQueueEntry;
 import com.ibm.as400.access.IFSFile;
 import com.ibm.as400.access.IFSFileInputStream;
 import com.ibm.as400.access.IFSFileOutputStream;
-import com.ibm.as400.access.Job;
+//import com.ibm.as400.access.Job;
 import com.ibm.as400.access.SystemValue;
 import com.ibm.as400.access.Trace;
 

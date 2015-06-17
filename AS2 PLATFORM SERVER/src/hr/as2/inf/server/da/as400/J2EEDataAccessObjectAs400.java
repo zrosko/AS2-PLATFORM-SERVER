@@ -496,10 +496,10 @@ public class J2EEDataAccessObjectAs400 extends J2EEDataAccessObject implements A
 			if (value.getSpoolFileNaziv().length() > 0)
 				splfList.setUserDataFilter(value.getSpoolFileNaziv().toUpperCase());//zr.31.3.2014. upperCase
 			splfList.openSynchronously();
-			Enumeration enum1 = splfList.getObjects();
-			int count = 0;
+			Enumeration<?> enum1 = splfList.getObjects();
+			//int count = 0;
 			while (enum1.hasMoreElements() /* && count < 6 */) {
-				count++;
+				//count++;
 				SpooledFile splf = (SpooledFile) enum1.nextElement();
 				if (splf != null) {
 					// output this spooled file's name

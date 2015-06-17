@@ -452,11 +452,10 @@ public final class J2EEConnectionJDBC extends J2EEConnection {
 	}
 
 	public String getDbSchema() {
-		if (_SCHEMA.equalsIgnoreCase("") || _SCHEMA.equalsIgnoreCase(" ")
-				|| _SCHEMA.equalsIgnoreCase("test"))
+		if (_SCHEMA.equalsIgnoreCase("") || _SCHEMA.equalsIgnoreCase(" "))
 			return "";
 		else
-			return " " + _SCHEMA + ".";
+			return _SCHEMA + ".";
 	}
 
 	public String getDbSchemaName() {
@@ -696,7 +695,21 @@ public final class J2EEConnectionJDBC extends J2EEConnection {
 			AS2Trace.trace(AS2Trace.E, e.toString());
 		}
 	}
-
+	public void setDBUSED(String value){
+		_DBUSED = value;
+	}
+	public void setDBNAME(String value){
+		_DBNAME = value;
+	}
+	public void setSCHEMA(String value){
+		_SCHEMA = value;
+	}
+	public String getDbName() {
+		if (_DBNAME.equalsIgnoreCase("") || _DBNAME.equalsIgnoreCase(" "))
+			return "";
+		else
+			return " " + _DBNAME + ".";
+	}
 	public String toString() {
 		return (super.toString() + "\n Connection	 	" + _connection
 				+ "\n DBUSED		" + _DBUSED + "\n DBNAME			" + _DBNAME

@@ -208,30 +208,4 @@ public final class AS2AuthorizationFacadeServer implements AS2AuthorizationFacad
     	J2EERBACKorisnikJdbc _dao = new J2EERBACKorisnikJdbc();
     	return _dao.daoFindAppAuthorizations(value);
     }
-    //************************************************************************************
-    /* NOVA SpredSheet logika samo TEST TODO move to some generic DATA SOURCE komponente */
-    public AS2RecordList fetchTable(AS2Record value) throws Exception {
-    	String tableName = value.get("tableName");
-    	String whereSql = value.get("whereSql");
-    	String sql = "select * from "+tableName+" "+whereSql;
-    	J2EERBACKorisnikJdbc _dao = new J2EERBACKorisnikJdbc();
-    	AS2RecordList rs = _dao.daoExecuteQuery(sql);
-    	if(value.exists("@meta")){
-    		AS2RecordList rs_meta = new AS2RecordList();
-    		for(String column:rs.getMetaData().keySet()){
-				rs_meta.addRow( rs.getMetaData(column).prepareRecord());				
-			}
-    		return rs_meta;
-    	}
-    	return rs;
-    }
-    public AS2RecordList addTableRow(AS2Record value) throws Exception {
-    	return new AS2RecordList();
-    }
-    public AS2RecordList updateTableRow(AS2Record value) throws Exception {
-    	return new AS2RecordList();
-    }
-    public AS2RecordList deleteTableRow(AS2Record value) throws Exception {
-    	return new AS2RecordList();
-    }
 }

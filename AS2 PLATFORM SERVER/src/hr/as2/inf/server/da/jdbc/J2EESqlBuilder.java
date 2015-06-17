@@ -390,7 +390,7 @@ public final boolean appNotLike(String s, String s1, String s2){
 	}
 }
 public static void main(String args[]) {
-    String args1[] = {"i1", "i2", "i3"};
+    //String args1[] = {"i1", "i2", "i3"};
     String f1 = "GGG";
     String f2 = "ROLEX";
 

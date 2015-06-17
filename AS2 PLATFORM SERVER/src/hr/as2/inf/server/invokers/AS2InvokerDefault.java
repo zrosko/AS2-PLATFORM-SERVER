@@ -10,7 +10,6 @@ import hr.as2.inf.common.types.AS2Date;
 import hr.as2.inf.server.exceptions.AS2ExceptionService;
 import hr.as2.inf.server.interceptors.AS2InterceptorDispatcher;
 import hr.as2.inf.server.security.AS2SecurityService;
-import hr.as2.inf.server.session.AS2SessionFactory;
 import hr.as2.inf.server.transaction.AS2Transaction;
 
 import java.lang.reflect.InvocationTargetException;

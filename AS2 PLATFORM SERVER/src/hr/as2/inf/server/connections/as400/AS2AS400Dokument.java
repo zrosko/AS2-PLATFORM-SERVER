@@ -9,7 +9,6 @@ package hr.as2.inf.server.connections.as400;
 import hr.as2.inf.common.data.AS2Record;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
 
 

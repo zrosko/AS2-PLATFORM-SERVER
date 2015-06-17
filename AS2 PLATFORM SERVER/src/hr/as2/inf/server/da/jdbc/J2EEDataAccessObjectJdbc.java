@@ -747,6 +747,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 					.getIdentiyColumns(table);
 			int identityCounter = identiyColumns.size();
 			sqlBuffer.append("insert into ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 			sqlBuffer.append(" ( ");
@@ -814,6 +815,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 			else
 				sqlBuffer.append(selectClause);
 			sqlBuffer.append(" from ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 
@@ -877,6 +879,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 			}
 
 			sqlBuffer.append(" from ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 			sqlBuffer.append(" ");
@@ -913,6 +916,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 			else
 				sqlBuffer.append(selectClause);
 			sqlBuffer.append(" from ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 			sqlBuffer.append(" where ");
@@ -950,6 +954,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 
 			J2EEConnectionJDBC mConnection = getConnection();
 			sqlBuffer.append("delete from ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 			sqlBuffer.append(" where ");
@@ -991,6 +996,7 @@ public class J2EEDataAccessObjectJdbc extends J2EEDataAccessObject {
 
 			J2EEConnectionJDBC mConnection = getConnection();
 			sqlBuffer.append("update ");
+			sqlBuffer.append(mConnection.getDbName());
 			sqlBuffer.append(mConnection.getDbSchema());
 			sqlBuffer.append(table);
 			sqlBuffer.append(" set ");

@@ -19,6 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class J2EEDefaultJSPController extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static AS2Context CONTEXT_KEEPER;
 	public static final String TO_PAGE = "@@to_page";
 	public static final String FROM_PAGE = "@@from_page";
@@ -114,7 +118,7 @@ protected AS2Record readHTMLRequest(
 	inputFields.setRemoteMethod(service);
 	inputFields.setRemoteObject(component);
 	//inputFields.set("LogInHostName", req.getRemoteAddr());
-	Enumeration E = req.getParameterNames();
+	Enumeration<?> E = req.getParameterNames();
 
 	while (E.hasMoreElements()) {
 
